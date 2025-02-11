@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Success Page</title>
+    <style>
+        /* Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #d9e6f2);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .success-container {
+            background-color: white;
+            text-align: center;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Success Icon */
+        .success-icon {
+            font-size: 60px;
+            color: #4CAF50;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 26px;
+            margin-top: 10px;
+        }
+
+        p {
+            color: #555;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        /* Dynamic Content Box */
+        .details-box {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .details-box strong {
+            color: #222;
+        }
+
+        /* Button Styling */
+        a {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="success-container">
+    <div class="success-icon">✔</div>
+    <h2>Success!</h2>
+
+    <p th:text="${successMessage}">Your entry has been successfully submitted.</p>
+
+    <!-- Display Vehicle Info -->
+    <div th:if="${vehicle}" class="details-box">
+        <h3>Vehicle Added</h3>
+        <p><strong>Vehicle Name:</strong> <span th:text="${vehicle.name}"></span></p>
+        <p><strong>Plate Number:</strong> <span th:text="${vehicle.plateNumber}"></span></p>
+        <p><strong>Carrying Weight:</strong> <span th:text="${vehicle.carryingWeight} + ' kg'"></span></p>
+    </div>
+
+
+    <!-- Display Item Info -->
+    <div th:if="${item}" class="details-box">
+        <h3>Item Added</h3>
+        <p><strong>Item Name:</strong> <span th:text="${item.name}"></span></p>
+        <p><strong>Item Code:</strong> <span th:text="${item.code}"></span></p>
+        <p><strong>Weight:</strong> <span th:text="${item.weight} + ' kg'"></span></p>
+    </div>
+
+
+    <!-- Display Assigned Item to Vehicle -->
+    <div th:if="${assignedItem}" class="details-box">
+        <h3>Item Assigned to Vehicle</h3>
+        <p><strong>Vehicle Name:</strong> <span th:text="${assignedItem.vehicle.name}"></span></p>
+        <p><strong>Item:</strong> <span th:text="${assignedItem.item.name}"></span></p>
+        <p><strong>Remaining Vehicle Weight:</strong> <span th:text="${assignedItem.remainingWeight} + ' kg'"></span></p>
+        <p><strong>Assignment Code:</strong> <span th:text="${assignedItem.assignmentCode}"></span></p>
+    </div>
+
+
+    <a href="/">Go Back to Home</a>
+</div>
+
+</body>
+</html>
